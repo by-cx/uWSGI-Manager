@@ -47,6 +47,15 @@ Config file /etc/uwsgi/config.xml:
 	</uwsgi>
 	</your_server>
 
+I assume, you use same paths of uwsgi binaries as I:
+
+	* /usr/bin/uwsgi
+	* /usr/local/bin/uwsgi25
+	* /usr/local/bin/uwsgi27
+	* /usr/local/bin/uwsgi31
+	* /usr/local/bin/uwsgi32
+
+If you want to use another paths, you have to go into code.
 
 If you are lost, try -h:
 
@@ -70,6 +79,9 @@ If you are lost, try -h:
 	                        Brutal reload all apps
 	  -l, --list            Print state of all apps
 
-Feel free send some useful patch.
+
+Or send me e-mail.
 
 Adam Strauch <cx@initd.cz>
+
+Feel free send some useful patch too :-)
