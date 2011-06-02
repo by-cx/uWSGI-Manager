@@ -1,0 +1,75 @@
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#####################################################################
+
+uWSGI Manager
+
+This is small python script for uWSGI instances. It can read your XML configuration and stop/reload/restart/start/what ever with your uWSGI processes. Originaly it was delevoped for Python hosting Rosti.cz, but parts of administration and tools are open now or will be opened soon. Script is working only under root privileges.
+
+Using:
+
+	$ mkdir /etc/uwsgi
+	$ vim /etc/uwsgi/config.xml
+	[copy modified configuration below]
+	$ uwsgi-manager.py -l
+	$ uwsgi-manager.py -R 1
+
+Config file /etc/uwsgi/config.xml:
+
+	<your_server>
+	<uwsgi id="48">
+	        <pythonpath>/home/user/django/</pythonpath>
+	        <master/>
+	        <no-orphans/>
+	        <processes>1</processes>
+	        <optimize>0</optimize>
+	        <home>/home/user/virtualenvs/default</home>
+	        <limit-as>128</limit-as>
+	        <chmod-socket>660</chmod-socket>
+	        <uid>user</uid>
+	        <gid>user</gid>
+	        <pidfile>/home/user/uwsgi/django.pid</pidfile>
+	        <socket>/home/user/uwsgi/django.sock</socket>
+	        <wsgi-file>/home/user/django/django.wsgi</wsgi-file>
+	        <daemonize>/home/user/uwsgi/django.log</daemonize>
+	        <chdir>/home/user/django/</chdir>
+	</uwsgi>
+	</your_server>
+
+
+If you are lost, try -h:
+
+	$ ./uwsgi-manager.py -h
+	Usage: uwsgi-manager.py [options]
+
+	Options:
+	  -h, --help            show this help message and exit
+	  -s ID, --start=ID     Start app
+	  -S ID, --stop=ID      Stop app (sig 9)
+	  -r ID, --reload=ID    Reload app (sig 1)
+	  -b ID, --brutal-reload=ID
+	                        Brutal reload app (sig 15)
+	  -R ID, --restart=ID   Restart app
+	  -c ID, --check=ID     Check state of app
+	  -a, --start-all       Start all apps
+	  -A, --stop-all        Stop all apps
+	  -w, --reload-all      Reload all apps
+	  -W, --restart-all     Restart all apps
+	  -B, --brutal-reload-all
+	                        Brutal reload all apps
+	  -l, --list            Print state of all apps
+
+Feel free send some useful patch.
+
+Adam Strauch <cx@initd.cz>
