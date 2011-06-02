@@ -15,7 +15,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 uWSGI Manager
 
-This is small python script for uWSGI instances. It can read your XML configuration and stop/reload/restart/start/what ever with your uWSGI processes. Originaly it was delevoped for Python hosting Rosti.cz, but parts of administration and tools are open now or will be opened soon. Script is working only under root privileges.
+This is small python script for uWSGI instances. It can read your XML configuration and stop/reload/restart/start/what ever with your uWSGI processes. Originaly it was delevoped for Python hosting Rosti.cz, but parts of administration and tools are open now or will be opened soon. Script works only under root privileges.
 
 Using:
 
