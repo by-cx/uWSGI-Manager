@@ -21,6 +21,8 @@ from xml.etree.ElementTree import XMLParser
 from subprocess import Popen, PIPE, call
 from optparse import OptionParser
 
+UWSGIs_PATH = "/usr/local/bin/uwsgi"
+
 class manager:
 	config_file = "/etc/uwsgi/config.xml"
 	config_tree = None
@@ -108,16 +110,9 @@ class manager:
 		data_raw = p.communicate()
 		version = ".".join(data_raw[1].split(" ")[1].split(".")[0:2])
 
-		uwsgi_bin = "/usr/bin/uwsgi"
-		if version == "2.5":
-			uwsgi_bin = "/usr/local/bin/uwsgi25"
-		elif version == "2.7":
-			uwsgi_bin = "/usr/local/bin/uwsgi27"
-		elif version == "3.1":
-			uwsgi_bin = "/usr/local/bin/uwsgi31"
-		elif version == "3.2":
-			uwsgi_bin = "/usr/local/bin/uwsgi32"
-			
+		uwsgi_bin = "%s%s" % (UWSGIs_PATH, version.replace(".",""))
+		if not os.path.isfile(uwsgi_bin):
+			uwsgi_bin = "/usr/bin/uwsgi"
 
 		if not self.running_check(id):
 			cmd = "sudo su %s -c '%s -x %s:%d'" % (self.config[id]["uid"], uwsgi_bin, self.config_file, id)
