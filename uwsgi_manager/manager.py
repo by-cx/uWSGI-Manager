@@ -125,7 +125,10 @@ class manager:
             uwsgi_bin = "/usr/bin/uwsgi"
 
         if not self.running_check(id):
-            cmd = "sudo su %s -c '%s -x %s:%d'" % (self.config[id]["uid"], uwsgi_bin, self.config_file, id)
+            if os.getuid() == 0:
+                cmd = "su %s -c '%s -x %s:%d'" % (self.config[id]["uid"], uwsgi_bin, self.config_file, id)
+            else:
+                cmd = "%s -x %s:%d" % (uwsgi_bin, self.config_file, id)
             self.run_cmd(cmd)
 
     def startall(self):
