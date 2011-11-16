@@ -8,7 +8,7 @@ def read(fname):
 
 setup(
     name = "uwsgi-manager",
-    version = "0.1.0",
+    version = "0.1.1",
     author = "Adam Strauch",
     author_email = "cx@initd.cz",
     description = ("Python tool for controling the uWSGI instances."),
