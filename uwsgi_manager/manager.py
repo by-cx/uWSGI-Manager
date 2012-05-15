@@ -79,11 +79,11 @@ class manager:
             if err.errno == errno.ESRCH:
                 return False
             elif err.errno == errno.EPERM:
-                print pid
+                print id
                 print "No permission to signal this process!"
                 sys.exit(1)
             else:
-                print pid
+                print id
                 print "Unknown error"
                 sys.exit(1)
         else:
